@@ -16,8 +16,8 @@ export default function Finished() {
       {players ? (
         <>
           {players.map((player, i) => (
-            <span key={i} className="m-4 text-2xl">
-              {player.name}
+            <span key={i} className="m-4 text-2xl text-secondary">
+              <span className="underline">{player.name}</span>
               {`'`}s score: {player.score}
             </span>
           ))}

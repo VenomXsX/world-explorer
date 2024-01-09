@@ -31,8 +31,8 @@ export default function GuessTheFlag() {
     setActivePlayerIndex(activePlayerIndex + 1);
     setInputVal("");
     if (
-      answer === country?.name.common.toLowerCase() ||
-      answer === country?.name.official.toLowerCase()
+      answer?.trim() === country?.name.common.toLowerCase() ||
+      answer?.trim() === country?.name.official.toLowerCase()
     ) {
       players[activePlayerIndex].score += 1;
       localStorage.setItem("world-explorer-players", JSON.stringify(players));
@@ -53,8 +53,9 @@ export default function GuessTheFlag() {
           <div className="w-full m-4 p-4 flex flex-col items-center text-secondary">
             {players ? (
               players.map((player, i) => (
-                <span key={i}>
-                  {player.name} : {player.score}
+                <span key={i} className="text-secondary text-lg">
+                  {player.name}
+                  {`'`}s score: {player.score}
                 </span>
               ))
             ) : (
@@ -110,7 +111,7 @@ export default function GuessTheFlag() {
           )}
         </>
       ) : (
-        <div className="w-fit p-4 text-secondary flex flex-col">
+        <div className="w-fit p-4 text-secondary flex flex-col gap-4">
           <span className="text-2xl font-bold">Game finished!</span>
           <Link
             href="/finished"

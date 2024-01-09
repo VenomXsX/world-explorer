@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { checkDuplicates } from "@/utils/helper";
 import { Player, TPlayer } from "@/utils/types";
+import { Minus } from "lucide-react";
 
 export default function Setup() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function Setup() {
       router.push("/game");
     }
   };
+  useEffect(() => console.log(placeholderPlayers), [placeholderPlayers]);
   return (
     <main className="w-full h-fit min-h-screen flex flex-col justify-center items-center">
       <form
@@ -55,14 +57,32 @@ export default function Setup() {
         />
         <span>Number of players (2 to 4 players)</span>
         {placeholderPlayers.map((name, i) => (
-          <input
-            key={i}
-            type="text"
-            name={`player${i + 1}`}
-            className="p-2 rounded-md text-black"
-            placeholder={name}
-            required
-          />
+          <div key={i} className="w-full flex flex-row items-center justify-center gap-4">
+            <input
+              type="text"
+              name={`player${i + 1}`}
+              className="p-2 rounded-md text-black"
+              placeholder={name}
+              required
+            />
+            {placeholderPlayers.length > 2 ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setPlaceholderPlayers(
+                    placeholderPlayers.filter(
+                      (item) => item !== `player${i + 1}`
+                    )
+                  );
+                }}
+                className="text-red-400 p-2 h-8 w-8 rounded-sm bg-red-600/75 hover:bg-red-600 hover:text-gray-200 duration-200 flex justify-center items-center"
+              >
+                <Minus strokeWidth={5} />
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
         ))}
         <button
           type="button"
