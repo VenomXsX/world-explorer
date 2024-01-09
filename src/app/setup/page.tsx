@@ -44,14 +44,14 @@ export default function Setup() {
           ""
         )}
         <span className="text-2xl font-bold">Game setup</span>
-        <span>Number of rounds (1 to 10 rounds)</span>
+        <span>Number of rounds (1 to 20 rounds)</span>
         <input
           type="number"
           name="rounds"
           className="p-2 rounded-md text-black"
           defaultValue={5}
           min={1}
-          max={10}
+          max={20}
         />
         <span>Number of players (2 to 4 players)</span>
         {placeholderPlayers.map((name, i) => (
