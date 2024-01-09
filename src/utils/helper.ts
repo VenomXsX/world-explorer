@@ -73,4 +73,8 @@ const filterTheCountries = ({
     });
 };
 
-export { sortCountries, filterTheCountries };
+const checkDuplicates = (arr: string[]) => {
+  return new Set(arr).size !== arr.length;
+};
+
+export { sortCountries, filterTheCountries, checkDuplicates };

@@ -94,3 +94,20 @@ export interface NameField {
   };
   cca3: string;
 }
+
+export type TPlayer = {
+  name: string;
+  score: number;
+};
+
+export class Player {
+  name: string;
+  score: number;
+  constructor(name: string) {
+    this.name = name;
+    this.score = 0;
+  }
+  guessCorrect() {
+    return (this.score += 1);
+  }
+}
