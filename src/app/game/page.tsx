@@ -27,7 +27,7 @@ export default function GuessTheFlag() {
       : [];
     setPlayers(parsedplayerdata);
     setRounds(rounddata ? Number(JSON.parse(rounddata)) : 0);
-    if (!playerdata || rounds) {
+    if (!playerdata || !rounds) {
       router.push("/setup");
     }
   }, []);
