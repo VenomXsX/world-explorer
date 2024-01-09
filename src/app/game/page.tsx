@@ -8,7 +8,8 @@ import Link from "next/link";
 
 export default function GuessTheFlag() {
   const [country, setCountry] = useState<Country | null>(null);
-  const [inputVal, setInputVal] = useState("");
+  const [nameInputVal, setNameInputVal] = useState("");
+  const [capitalInputVal, setCapitalInputVal] = useState("");
   const [players, setPlayers] = useState<TPlayer[]>([]);
   const [rounds, setRounds] = useState(-1);
   const [currentRound, setCurrentRound] = useState(1);
@@ -27,13 +28,27 @@ export default function GuessTheFlag() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const answer = formData.get("answer")?.toString().toLowerCase();
+    const nameAnswer = formData
+      .get("country-name-answer")
+      ?.toString()
+      .toLowerCase()
+      .trim();
+    const capitalAnswer = formData
+      .get("country-name-answer")
+      ?.toString()
+      .toLowerCase()
+      .trim();
     setActivePlayerIndex(activePlayerIndex + 1);
-    setInputVal("");
+    setNameInputVal("");
+    setCapitalInputVal("");
     if (
-      answer?.trim() === country?.name.common.toLowerCase() ||
-      answer?.trim() === country?.name.official.toLowerCase()
+      nameAnswer === country?.name.common.toLowerCase() ||
+      nameAnswer === country?.name.official.toLowerCase()
     ) {
+      players[activePlayerIndex].score += 1;
+      localStorage.setItem("world-explorer-players", JSON.stringify(players));
+    }
+    if (capitalAnswer === country?.capital[0].toLowerCase()) {
       players[activePlayerIndex].score += 1;
       localStorage.setItem("world-explorer-players", JSON.stringify(players));
     }
@@ -88,21 +103,35 @@ export default function GuessTheFlag() {
               </div>
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-row justify-center"
+                className="flex flex-col justify-center gap-4 w-full"
               >
-                <input
-                  name="answer"
-                  type="text"
-                  value={inputVal}
-                  onChange={(e) => setInputVal(e.target.value)}
-                  autoComplete="off"
-                  className="p-2 bg-white/20 outline-none text-lg text-secondary"
-                />
+                <div className="w-full flex flex-row gap-4 items-center justify-between">
+                  <span className="text-secondary text-xl">Country name:</span>
+                  <input
+                    name="country-name-answer"
+                    type="text"
+                    value={nameInputVal}
+                    onChange={(e) => setNameInputVal(e.target.value)}
+                    autoComplete="off"
+                    className="p-2 bg-white/20 outline-none text-lg text-secondary"
+                  />
+                </div>
+                <div className="w-full flex flex-row gap-4 items-center justify-between">
+                  <span className="text-secondary text-xl">Capital name:</span>
+                  <input
+                    name="capital-answer"
+                    type="text"
+                    value={capitalInputVal}
+                    onChange={(e) => setCapitalInputVal(e.target.value)}
+                    autoComplete="off"
+                    className="p-2 bg-white/20 outline-none text-lg text-secondary"
+                  />
+                </div>
                 <button
                   type="submit"
                   className="p-2 bg-green-500 rounded-sm text-secondary mx-4"
                 >
-                  Enter
+                  Submit
                 </button>
               </form>
             </div>

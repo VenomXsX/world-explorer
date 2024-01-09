@@ -9,7 +9,7 @@ export default function Navbar() {
     router.push(`/results?q=${q}`);
   };
   return (
-    <nav className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center bg-white/10 backdrop-blur-md fixed top-0 z-20">
+    <nav className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center bg-white/10 backdrop-blur-md">
       <div className="flex flex-col sm:flex-row sm:items-center">
         <div className="flex flex-row justify-between items-center">
           <span className="py-4 font-bold text-secondary text-2xl font-serif tracking-tighter">
