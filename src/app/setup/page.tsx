@@ -17,10 +17,9 @@ export default function Setup() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    // store the data in localStorage here
-    const playernames = placeholderPlayers.map((item) => {
-      return formData.get(item);
-    }) as string[];
+    const playernames = placeholderPlayers
+      .map((item) => formData.get(item) as string)
+      .map((name) => name.trim());
     if (checkDuplicates(playernames)) {
       setNameDuplicate(true);
     } else {
@@ -57,7 +56,10 @@ export default function Setup() {
         />
         <span>Number of players (2 to 4 players)</span>
         {placeholderPlayers.map((name, i) => (
-          <div key={i} className="w-full flex flex-row items-center justify-center gap-4">
+          <div
+            key={i}
+            className="w-full flex flex-row items-center justify-center gap-4"
+          >
             <input
               type="text"
               name={`player${i + 1}`}

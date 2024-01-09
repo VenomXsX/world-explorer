@@ -5,8 +5,10 @@ import type { Country, TPlayer } from "@/utils/types";
 import { fetchAll } from "../../../api/requests";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function GuessTheFlag() {
+  const router = useRouter();
   const [country, setCountry] = useState<Country | null>(null);
   const [nameInputVal, setNameInputVal] = useState("");
   const [capitalInputVal, setCapitalInputVal] = useState("");
@@ -18,11 +20,16 @@ export default function GuessTheFlag() {
     fetchAll().then((data) => {
       setCountry(data[Math.floor(Math.random() * data.length)]);
     });
-    const playerdata: TPlayer[] =
-      JSON.parse(localStorage.getItem("world-explorer-players") as string) ??
-      [];
-    setPlayers(playerdata);
-    setRounds(Number(localStorage.getItem("world-explorer-rounds")));
+    const playerdata = localStorage.getItem("world-explorer-players") as string;
+    const rounddata = localStorage.getItem("world-explorer-rounds");
+    const parsedplayerdata: TPlayer[] = playerdata
+      ? JSON.parse(playerdata)
+      : [];
+    setPlayers(parsedplayerdata);
+    setRounds(rounddata ? Number(JSON.parse(rounddata)) : 0);
+    if (!playerdata || rounds) {
+      router.push("/setup");
+    }
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
