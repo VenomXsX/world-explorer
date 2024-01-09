@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-gradient-radial from-slate-800 to-slate-950 min-h-screen`}
+        className={`${inter.className} bg-gradient-radial from-slate-800 to-slate-950 min-h-screen flex flex-col`}
       >
         <Navbar />
         {children}

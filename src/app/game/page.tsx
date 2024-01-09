@@ -69,7 +69,7 @@ export default function GuessTheFlag() {
     }
   };
   return (
-    <main className="h-fit min-h-screen flex flex-col justify-center items-center gap-4">
+    <main className="h-fit flex flex-col flex-1 justify-center items-center gap-4">
       {currentRound <= rounds ? (
         <>
           <div className="w-full m-4 p-4 flex flex-col items-center text-secondary">

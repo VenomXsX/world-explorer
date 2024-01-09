@@ -32,7 +32,7 @@ export default function Setup() {
   };
   useEffect(() => console.log(placeholderPlayers), [placeholderPlayers]);
   return (
-    <main className="w-full h-fit min-h-screen flex flex-col justify-center items-center">
+    <main className="w-full h-fit flex flex-col flex-1 justify-center items-center">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col p-8 rounded-md bg-transparent/25 text-secondary gap-4"
