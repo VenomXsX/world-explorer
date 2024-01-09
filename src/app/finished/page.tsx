@@ -12,11 +12,11 @@ export default function Finished() {
     setPlayers(playerdata);
   }, []);
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full h-fit min-h-screen flex flex-col justify-center items-center text-secondary">
       {players ? (
         <>
           {players.map((player) => (
-            <span>
+            <span className="m-4 text-2xl">
               {player.name}'s score: {player.score}
             </span>
           ))}

@@ -18,7 +18,6 @@ export default function Setup() {
     const formData = new FormData(e.target as HTMLFormElement);
     // store the data in localStorage here
     const playernames = placeholderPlayers.map((item) => {
-      console.log(formData.get(item));
       return formData.get(item);
     }) as string[];
     if (checkDuplicates(playernames)) {

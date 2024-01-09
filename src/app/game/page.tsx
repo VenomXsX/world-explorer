@@ -24,7 +24,6 @@ export default function GuessTheFlag() {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const answer = formData.get("answer")?.toString().toLowerCase();
-    setCurrentRound(currentRound + 1);
     setActivePlayerIndex(activePlayerIndex + 1);
     setInputVal("");
     if (
@@ -34,6 +33,7 @@ export default function GuessTheFlag() {
       players[activePlayerIndex].score += 1;
       localStorage.setItem("world-explorer-players", JSON.stringify(players));
     }
+
     if (activePlayerIndex === players.length - 1) {
       setActivePlayerIndex(0);
       setCurrentRound(currentRound + 1);
@@ -44,19 +44,19 @@ export default function GuessTheFlag() {
   };
   return (
     <main className="h-fit min-h-screen flex flex-col justify-center items-center gap-4">
-      <div className="w-full m-4 p-4 flex flex-col items-center text-secondary">
-        {players ? (
-          players.map((player) => (
-            <span>
-              {player.name} : {player.score}
-            </span>
-          ))
-        ) : (
-          <span>Loading...</span>
-        )}
-      </div>
       {currentRound <= rounds ? (
         <>
+          <div className="w-full m-4 p-4 flex flex-col items-center text-secondary">
+            {players ? (
+              players.map((player) => (
+                <span>
+                  {player.name} : {player.score}
+                </span>
+              ))
+            ) : (
+              <span>Loading...</span>
+            )}
+          </div>
           <span className="text-secondary text-4xl font-semibold">
             Round: {currentRound}
           </span>
@@ -105,9 +105,12 @@ export default function GuessTheFlag() {
           )}
         </>
       ) : (
-        <div className="w-full p-4 text-secondary flex flex-col">
+        <div className="w-fit p-4 text-secondary flex flex-col">
           <span className="text-2xl font-bold">Game finished!</span>
-          <Link href="/finished" className="p-4 rounded-md bg-green-500/75">
+          <Link
+            href="/finished"
+            className="p-4 rounded-md bg-green-500/75 text-center"
+          >
             See result
           </Link>
         </div>
