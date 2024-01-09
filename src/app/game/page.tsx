@@ -10,7 +10,7 @@ export default function GuessTheFlag() {
   const [country, setCountry] = useState<Country | null>(null);
   const [inputVal, setInputVal] = useState("");
   const [players, setPlayers] = useState<TPlayer[]>([]);
-  const rounds = Number(localStorage.getItem("world-explorer-rounds"));
+  const [rounds, setRounds] = useState(-1);
   const [currentRound, setCurrentRound] = useState(1);
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
   useEffect(() => {
@@ -21,6 +21,7 @@ export default function GuessTheFlag() {
       JSON.parse(localStorage.getItem("world-explorer-players") as string) ??
       [];
     setPlayers(playerdata);
+    setRounds(Number(localStorage.getItem("world-explorer-rounds")));
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
