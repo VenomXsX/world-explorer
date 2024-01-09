@@ -10,6 +10,7 @@ import { Minus } from "lucide-react";
 export default function Setup() {
   const router = useRouter();
   const [nameDuplicate, setNameDuplicate] = useState(false);
+  const [invalidRounds, setInvalidRounds] = useState(false);
   const [placeholderPlayers, setPlaceholderPlayers] = useState<string[]>([
     "player1",
     "player2",
@@ -22,6 +23,9 @@ export default function Setup() {
       .map((name) => name.trim());
     if (checkDuplicates(playernames)) {
       setNameDuplicate(true);
+    }
+    if (!Number(formData.get("rounds"))) {
+      setInvalidRounds(true);
     } else {
       const players: TPlayer[] = playernames.map((name) => new Player(name));
       const rounds = formData.get("rounds") as string;
@@ -40,6 +44,13 @@ export default function Setup() {
         {nameDuplicate ? (
           <span className="bg-red-400/50 p-4 rounded-md w-full">
             There is a name duplicate !
+          </span>
+        ) : (
+          ""
+        )}
+        {invalidRounds ? (
+          <span className="bg-red-400/50 p-4 rounded-md w-full">
+            Invalid rounds
           </span>
         ) : (
           ""
@@ -66,6 +77,7 @@ export default function Setup() {
               className="p-2 rounded-md text-black"
               placeholder={name}
               required
+              autoComplete="off"
             />
             {placeholderPlayers.length > 2 ? (
               <button
