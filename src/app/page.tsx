@@ -8,7 +8,7 @@ export default function Home() {
     localStorage.setItem("world-explorer-rounds", "");
   }, []);
   return (
-    <div className="w-full h-fit flex flex-col flex-1 items-center justify-center">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center">
       <span className="text-6xl font-sans font-bold text-secondary text-center">
         World Explorer
       </span>

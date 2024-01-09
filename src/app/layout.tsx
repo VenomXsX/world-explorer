@@ -22,7 +22,7 @@ export default function RootLayout({
         className={`${inter.className} bg-gradient-radial from-slate-800 to-slate-950 min-h-screen flex flex-col`}
       >
         <Navbar />
-        <div className="pb-12">{children}</div>
+          {children}
         <Footer />
       </body>
     </html>

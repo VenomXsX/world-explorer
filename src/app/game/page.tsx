@@ -90,7 +90,7 @@ export default function GuessTheFlag() {
     }
   };
   return (
-    <main className="h-fit flex flex-col flex-1 justify-center items-center gap-4">
+    <main className="min-h-screen flex flex-col justify-center items-center gap-4">
       {currentRound <= rounds ? (
         <>
           <div className="w-full m-4 p-4 flex flex-col items-center text-secondary">
@@ -114,7 +114,7 @@ export default function GuessTheFlag() {
           </span>
           <span className="text-secondary text-lg"></span>
           {country ? (
-            <div className="flex flex-col justify-center items-center gap-8">
+            <div className="flex flex-col justify-center items-center gap-8 w-full px-8">
               <div className="w-auto h-[300px] flex flex-row justify-center items-center">
                 <Image
                   alt={"Mystery country"}
@@ -131,33 +131,37 @@ export default function GuessTheFlag() {
               </div>
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col justify-center gap-4 w-full"
+                className="flex flex-col justify-center gap-4 w-full items-center"
               >
-                <div className="w-full flex flex-row gap-4 items-center justify-between">
-                  <span className="text-secondary text-xl">Country name:</span>
+                <div className="w-full grid grid-cols-2 gap-4">
+                  <span className="text-secondary text-md text-ellipsis">
+                    Country name:
+                  </span>
                   <input
                     name="country-name-answer"
                     type="text"
                     value={nameInputVal}
                     onChange={(e) => setNameInputVal(e.target.value)}
                     autoComplete="off"
-                    className="p-2 bg-white/20 outline-none text-lg text-secondary"
+                    className="p-2 bg-white/20 outline-none text-lg text-secondary flex-1 sm:flex-none"
                   />
                 </div>
-                <div className="w-full flex flex-row gap-4 items-center justify-between">
-                  <span className="text-secondary text-xl">Capital name:</span>
+                <div className="w-full grid grid-cols-2 gap-4">
+                  <span className="text-secondary text-md text-ellipsis">
+                    Capital name:
+                  </span>
                   <input
                     name="capital-answer"
                     type="text"
                     value={capitalInputVal}
                     onChange={(e) => setCapitalInputVal(e.target.value)}
                     autoComplete="off"
-                    className="p-2 bg-white/20 outline-none text-lg text-secondary"
+                    className="p-2 bg-white/20 outline-none text-lg text-secondary flex-1 sm:flex-none"
                   />
                 </div>
                 {country.languages ? (
-                  <div className="w-full flex flex-row gap-4 items-center justify-between">
-                    <span className="text-secondary text-xl">
+                  <div className="w-full grid grid-cols-2 gap-4">
+                    <span className="text-secondary text-md break-words">
                       Language(s) spoken:
                     </span>
                     <input
@@ -174,7 +178,7 @@ export default function GuessTheFlag() {
                 )}
                 <button
                   type="submit"
-                  className="p-2 bg-green-500 rounded-sm text-secondary mx-4"
+                  className="px-4 py-2 bg-green-500 rounded-sm text-secondary mx-4"
                 >
                   Submit
                 </button>
