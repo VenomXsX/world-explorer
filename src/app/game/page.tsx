@@ -41,7 +41,7 @@ export default function GuessTheFlag() {
       .toLowerCase()
       .trim();
     const capitalAnswer = formData
-      .get("country-name-answer")
+      .get("capital-answer")
       ?.toString()
       .toLowerCase()
       .trim();
