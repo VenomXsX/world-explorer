@@ -84,7 +84,7 @@ export default function Setup() {
           type="submit"
           className={`p-4 rounded-md text-xl text-secondary hover:bg-green-400/75 duration-300 `}
         >
-          Let's play
+          Let{`'`}s play
         </button>
       </form>
     </main>

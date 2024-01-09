@@ -48,8 +48,8 @@ export default function GuessTheFlag() {
         <>
           <div className="w-full m-4 p-4 flex flex-col items-center text-secondary">
             {players ? (
-              players.map((player) => (
-                <span>
+              players.map((player, i) => (
+                <span key={i}>
                   {player.name} : {player.score}
                 </span>
               ))
@@ -61,7 +61,8 @@ export default function GuessTheFlag() {
             Round: {currentRound}
           </span>
           <span className="text-secondary text-4xl font-semibold">
-            {players[activePlayerIndex].name}'s turn
+            {players[activePlayerIndex].name}
+            {`'`}s turn
           </span>
           <span className="text-secondary text-lg"></span>
           {country ? (

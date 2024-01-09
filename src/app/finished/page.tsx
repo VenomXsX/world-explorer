@@ -15,9 +15,10 @@ export default function Finished() {
     <div className="w-full h-fit min-h-screen flex flex-col justify-center items-center text-secondary">
       {players ? (
         <>
-          {players.map((player) => (
-            <span className="m-4 text-2xl">
-              {player.name}'s score: {player.score}
+          {players.map((player, i) => (
+            <span key={i} className="m-4 text-2xl">
+              {player.name}
+              {`'`}s score: {player.score}
             </span>
           ))}
           <Link
