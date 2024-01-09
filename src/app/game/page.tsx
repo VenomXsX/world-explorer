@@ -9,8 +9,7 @@ import Link from "next/link";
 export default function GuessTheFlag() {
   const [country, setCountry] = useState<Country | null>(null);
   const [inputVal, setInputVal] = useState("");
-  const players: TPlayer[] =
-    JSON.parse(localStorage.getItem("world-explorer-players") as string) ?? [];
+  const [players, setPlayers] = useState<TPlayer[]>([]);
   const rounds = Number(localStorage.getItem("world-explorer-rounds"));
   const [currentRound, setCurrentRound] = useState(1);
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
@@ -18,6 +17,10 @@ export default function GuessTheFlag() {
     fetchAll().then((data) => {
       setCountry(data[Math.floor(Math.random() * data.length)]);
     });
+    const playerdata: TPlayer[] =
+      JSON.parse(localStorage.getItem("world-explorer-players") as string) ??
+      [];
+    setPlayers(playerdata);
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
