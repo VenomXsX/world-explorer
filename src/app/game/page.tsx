@@ -12,6 +12,7 @@ export default function GuessTheFlag() {
   const [country, setCountry] = useState<Country | null>(null);
   const [nameInputVal, setNameInputVal] = useState("");
   const [capitalInputVal, setCapitalInputVal] = useState("");
+  const [languageInputVal, setLanguageInputVal] = useState("");
   const [players, setPlayers] = useState<TPlayer[]>([]);
   const [rounds, setRounds] = useState(-1);
   const [currentRound, setCurrentRound] = useState(1);
@@ -45,9 +46,16 @@ export default function GuessTheFlag() {
       ?.toString()
       .toLowerCase()
       .trim();
+    const languageAnswer = formData
+      .get("language-answer")
+      ?.toString()
+      .toLowerCase()
+      .trim();
     setActivePlayerIndex(activePlayerIndex + 1);
     setNameInputVal("");
     setCapitalInputVal("");
+    setLanguageInputVal("");
+    // Country name check
     if (
       nameAnswer === country?.name.common.toLowerCase() ||
       nameAnswer === country?.name.official.toLowerCase()
@@ -55,7 +63,20 @@ export default function GuessTheFlag() {
       players[activePlayerIndex].score += 1;
       localStorage.setItem("world-explorer-players", JSON.stringify(players));
     }
+    // Country capital check
     if (capitalAnswer === country?.capital[0].toLowerCase()) {
+      players[activePlayerIndex].score += 1;
+      localStorage.setItem("world-explorer-players", JSON.stringify(players));
+    }
+    // Country language check
+    if (
+      country &&
+      country.languages &&
+      languageAnswer &&
+      Object.keys(country.languages)
+        .map((key) => country.languages[key].toLowerCase())
+        .includes(languageAnswer)
+    ) {
       players[activePlayerIndex].score += 1;
       localStorage.setItem("world-explorer-players", JSON.stringify(players));
     }
@@ -134,6 +155,23 @@ export default function GuessTheFlag() {
                     className="p-2 bg-white/20 outline-none text-lg text-secondary"
                   />
                 </div>
+                {country.languages ? (
+                  <div className="w-full flex flex-row gap-4 items-center justify-between">
+                    <span className="text-secondary text-xl">
+                      Language(s) spoken:
+                    </span>
+                    <input
+                      name="language-answer"
+                      type="text"
+                      value={languageInputVal}
+                      onChange={(e) => setLanguageInputVal(e.target.value)}
+                      autoComplete="off"
+                      className="p-2 bg-white/20 outline-none text-lg text-secondary"
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <button
                   type="submit"
                   className="p-2 bg-green-500 rounded-sm text-secondary mx-4"
