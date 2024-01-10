@@ -7,10 +7,9 @@ import { redirect } from "next/navigation";
 export default function Finished() {
   const [players, setPlayers] = useState<TPlayer[]>([]);
   useEffect(() => {
-    const playerdata = localStorage.getItem("world-explorer-players") as string;
-    const parsedplayerdata: TPlayer[] = playerdata
-      ? JSON.parse(playerdata)
-      : redirect("/setup");
+    const playerdata = localStorage.getItem("world-explorer-players");
+    if (!playerdata) redirect("/setup");
+    setPlayers(JSON.parse(playerdata));
   }, []);
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center text-secondary">

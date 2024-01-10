@@ -4,8 +4,8 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    localStorage.setItem("world-explorer-players", "");
-    localStorage.setItem("world-explorer-rounds", "");
+    localStorage.removeItem("world-explorer-players");
+    localStorage.removeItem("world-explorer-rounds");
   }, []);
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center">
