@@ -2,14 +2,15 @@
 import { TPlayer } from "@/utils/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 
 export default function Finished() {
   const [players, setPlayers] = useState<TPlayer[]>([]);
   useEffect(() => {
-    const playerdata: TPlayer[] =
-      JSON.parse(localStorage.getItem("world-explorer-players") as string) ??
-      [];
-    setPlayers(playerdata);
+    const playerdata = localStorage.getItem("world-explorer-players") as string;
+    const parsedplayerdata: TPlayer[] = playerdata
+      ? JSON.parse(playerdata)
+      : redirect("/setup");
   }, []);
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center text-secondary">

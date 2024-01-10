@@ -5,10 +5,9 @@ import type { Country, TPlayer } from "@/utils/types";
 import { fetchAll } from "../../../api/requests";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function GuessTheFlag() {
-  const router = useRouter();
   const [country, setCountry] = useState<Country | null>(null);
   const [nameInputVal, setNameInputVal] = useState("");
   const [capitalInputVal, setCapitalInputVal] = useState("");
@@ -29,7 +28,7 @@ export default function GuessTheFlag() {
     setPlayers(parsedplayerdata);
     setRounds(rounddata ? Number(JSON.parse(rounddata)) : 0);
     if (!playerdata || !rounds) {
-      router.push("/setup");
+      redirect("/setup");
     }
   }, []);
 
