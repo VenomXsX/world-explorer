@@ -10,11 +10,3 @@ body {
   overflow-y: auto;
   height: 100%;
 }
-
-.delay-100 {
-  animation-delay: 20ms;
-}
-
-.delay-200 {
-  animation-delay: 40ms;
-}
